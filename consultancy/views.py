@@ -68,49 +68,53 @@ def booking(request):
         date = request.POST.get('date')
         message = request.POST.get('message')
 
-        # ================= ADMIN MAIL =================
-
-        send_mail(
-            'New Consultation Booking',
-            f'''
+        try:
+            send_mail(
+                'New Consultation Booking',
+                f'''
 New Booking Received
 
 Name: {name}
 Email: {email}
 Phone: {phone}
-Consultation Date: {date}
+Date: {date}
 
 Requirement:
 {message}
-            ''',
-            settings.EMAIL_HOST_USER,
-            ['nexgentax2025@gmail.com'],
-            fail_silently=True,
-        )
+                ''',
+                settings.EMAIL_HOST_USER,
+                ['nexgentax2025@gmail.com'],
+                fail_silently=False,
+            )
 
-        # ================= USER CONFIRMATION =================
-
-        try:
             send_mail(
-                    'Booking Confirmed',
-                    f'''
-            Hello {name},
+                'Booking Confirmed - NexGen Tax Consultancy',
+                f'''
+Hello {name},
 
-            Your consultation booking is confirmed.
+Your consultation booking is confirmed.
 
-            Date: {date}
+Date: {date}
+Phone: {phone}
 
-            Thank you for choosing NexGen Tax Consultancy.
-                    ''',
-                    settings.EMAIL_HOST_USER,
-                    [email],
-                    fail_silently=False,
-                )
+Our team will contact you shortly.
+
+Thank you for choosing NexGen Tax Consultancy.
+
+Regards,
+NexGen Tax Consultancy
+                ''',
+                settings.EMAIL_HOST_USER,
+                [email],
+                fail_silently=False,
+            )
+
         except Exception as e:
-                print("USER EMAIL ERROR:", e)
-                return render(request, 'booking.html', {
-                        'success': True
-                    })
+            print("EMAIL ERROR:", e)
+
+        return render(request, 'booking.html', {
+            'success': True
+        })
 
     return render(request, 'booking.html')
 
