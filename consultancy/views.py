@@ -1,22 +1,52 @@
 from django.shortcuts import render
-from django.core.mail import get_connection, EmailMessage
 from django.conf import settings
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
+
+
+def send_brevo_email(subject, message, to_email, to_name="User"):
+    configuration = sib_api_v3_sdk.Configuration()
+    configuration.api_key["api-key"] = settings.BREVO_API_KEY
+
+    api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+        sib_api_v3_sdk.ApiClient(configuration)
+    )
+
+    sender = {
+        "name": "NexGen Tax Consultancy",
+        "email": settings.DEFAULT_FROM_EMAIL,
+    }
+
+    receiver = [
+        {
+            "email": to_email,
+            "name": to_name,
+        }
+    ]
+
+    email_data = sib_api_v3_sdk.SendSmtpEmail(
+        sender=sender,
+        to=receiver,
+        subject=subject,
+        html_content=f"<pre>{message}</pre>",
+    )
+
+    try:
+        api_instance.send_transac_email(email_data)
+        return True
+    except ApiException as e:
+        print("BREVO EMAIL ERROR:", e)
+        return False
 
 
 def home(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        message = request.POST.get("message")
 
-        try:
-            connection = get_connection()
-            connection.open()
-
-            admin_mail = EmailMessage(
-                subject='New Contact Message',
-                body=f'''
+        admin_message = f"""
 New Contact Request
 
 Name: {name}
@@ -25,15 +55,9 @@ Phone: {phone}
 
 Message:
 {message}
-                ''',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=['sulekhastalin2006@gmail.com'],
-                connection=connection,
-            )
+"""
 
-            user_mail = EmailMessage(
-                subject='Message Received - NexGen Tax Consultancy',
-                body=f'''
+        user_message = f"""
 Hello {name},
 
 Thank you for contacting NexGen Tax Consultancy.
@@ -43,41 +67,36 @@ Our team will contact you shortly.
 
 Regards,
 NexGen Tax Consultancy
-                ''',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=[email],
-                connection=connection,
-            )
+"""
 
-            admin_mail.send()
-            user_mail.send()
-            connection.close()
+        send_brevo_email(
+            "New Contact Message",
+            admin_message,
+            "sulekhastalin2006@gmail.com",
+            "Admin",
+        )
 
-        except Exception as e:
-            print("EMAIL ERROR:", type(e).__name__, e)
+        send_brevo_email(
+            "Message Received - NexGen Tax Consultancy",
+            user_message,
+            email,
+            name,
+        )
 
-        return render(request, 'index.html', {
-            'contact_success': True
-        })
+        return render(request, "index.html", {"contact_success": True})
 
-    return render(request, 'index.html')
+    return render(request, "index.html")
 
 
 def booking(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        date = request.POST.get('date')
-        message = request.POST.get('message')
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        date = request.POST.get("date")
+        message = request.POST.get("message")
 
-        try:
-            connection = get_connection()
-            connection.open()
-
-            admin_mail = EmailMessage(
-                subject='New Consultation Booking',
-                body=f'''
+        admin_message = f"""
 New Booking Received
 
 Name: {name}
@@ -87,15 +106,9 @@ Date: {date}
 
 Requirement:
 {message}
-                ''',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=['sulekhastalin2006@gmail.com'],
-                connection=connection,
-            )
+"""
 
-            user_mail = EmailMessage(
-                subject='Booking Confirmed - NexGen Tax Consultancy',
-                body=f'''
+        user_message = f"""
 Hello {name},
 
 Your consultation booking is confirmed.
@@ -109,25 +122,26 @@ Thank you for choosing NexGen Tax Consultancy.
 
 Regards,
 NexGen Tax Consultancy
-                ''',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=[email],
-                connection=connection,
-            )
+"""
 
-            admin_mail.send()
-            user_mail.send()
-            connection.close()
+        send_brevo_email(
+            "New Consultation Booking",
+            admin_message,
+            "sulekhastalin2006@gmail.com",
+            "Admin",
+        )
 
-        except Exception as e:
-            print("EMAIL ERROR:", type(e).__name__, e)
+        send_brevo_email(
+            "Booking Confirmed - NexGen Tax Consultancy",
+            user_message,
+            email,
+            name,
+        )
 
-        return render(request, 'booking.html', {
-            'success': True
-        })
+        return render(request, "booking.html", {"success": True})
 
-    return render(request, 'booking.html')
+    return render(request, "booking.html")
 
 
 def services(request):
-    return render(request, 'services.html')
+    return render(request, "services.html")
