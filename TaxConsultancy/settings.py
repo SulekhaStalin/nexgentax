@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,16 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$o&-*y+&_di#u6t$r^t62i7$-f^c0evep&4x&h68h=vvv%68ya'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-<<<<<<< HEAD
 DEBUG = False
 
-ALLOWED_HOSTS = ['nexgentax.onrender.com', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://nexgentax.onrender.com']
-=======
-DEBUG = True
+ALLOWED_HOSTS = [
+    'nexgentax.onrender.com',
+    '127.0.0.1',
+    'localhost'
+]
+STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = []
->>>>>>> 034e93c (Initial commit)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Application definition
@@ -50,10 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-<<<<<<< HEAD
     'whitenoise.middleware.WhiteNoiseMiddleware',
-=======
->>>>>>> 034e93c (Initial commit)
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -138,17 +138,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'nexgentax2025@gmail.com'
-<<<<<<< HEAD
+
 EMAIL_HOST_PASSWORD = 'unlv pems vlxx khxy'
-=======
-EMAIL_HOST_PASSWORD = 'unlv pems vlxx khxy'
->>>>>>> 034e93c (Initial commit)
-import os
 
-STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
