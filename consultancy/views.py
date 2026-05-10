@@ -12,11 +12,10 @@ def home(request):
         phone = request.POST.get('phone')
         message = request.POST.get('message')
 
-        # ================= ADMIN MAIL =================
-
-        send_mail(
-            'New Contact Message',
-            f'''
+        try:
+            send_mail(
+                'New Contact Message',
+                f'''
 New Contact Request
 
 Name: {name}
@@ -25,17 +24,15 @@ Phone: {phone}
 
 Message:
 {message}
-            ''',
-            settings.EMAIL_HOST_USER,
-            ['sulekhastalin2006@gmail.com'],
-            fail_silently=True,
-        )
+                ''',
+                settings.DEFAULT_FROM_EMAIL,
+                ['sulekhastalin2006@gmail.com'],
+                fail_silently=False,
+            )
 
-        # ================= USER CONFIRMATION =================
-
-        send_mail(
-            'Message Received',
-            f'''
+            send_mail(
+                'Message Received - NexGen Tax Consultancy',
+                f'''
 Hello {name},
 
 Thank you for contacting NexGen Tax Consultancy.
@@ -45,11 +42,14 @@ Our team will contact you shortly.
 
 Regards,
 NexGen Tax Consultancy
-            ''',
-            settings.EMAIL_HOST_USER,
-            [email],
-            fail_silently=False,
-        )
+                ''',
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
+
+        except Exception as e:
+            print("EMAIL ERROR:", type(e).__name__, e)
 
         return render(request, 'index.html', {
             'contact_success': True
@@ -82,7 +82,7 @@ Date: {date}
 Requirement:
 {message}
                 ''',
-                settings.EMAIL_HOST_USER,
+                settings.DEFAULT_FROM_EMAIL,
                 ['sulekhastalin2006@gmail.com'],
                 fail_silently=False,
             )
@@ -104,19 +104,17 @@ Thank you for choosing NexGen Tax Consultancy.
 Regards,
 NexGen Tax Consultancy
                 ''',
-                settings.EMAIL_HOST_USER,
+                settings.DEFAULT_FROM_EMAIL,
                 [email],
                 fail_silently=False,
             )
 
         except Exception as e:
-            print("EMAIL ERROR:", e)
+            print("EMAIL ERROR:", type(e).__name__, e)
 
         return render(request, 'booking.html', {
             'success': True
         })
-    print("EMAIL USER:", settings.EMAIL_HOST_USER)
-    print("EMAIL PASSWORD EXISTS:", bool(settings.EMAIL_HOST_PASSWORD))
 
     return render(request, 'booking.html')
 
