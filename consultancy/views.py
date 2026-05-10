@@ -115,6 +115,8 @@ NexGen Tax Consultancy
         return render(request, 'booking.html', {
             'success': True
         })
+    print("EMAIL USER:", settings.EMAIL_HOST_USER)
+    print("EMAIL PASSWORD EXISTS:", bool(settings.EMAIL_HOST_PASSWORD))
 
     return render(request, 'booking.html')
 
