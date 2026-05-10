@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Consultation</title>
+
+    {% load static %}
+    <link rel="icon" type="image/jpeg" href="{% static 'images/logo.jpeg' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+    <img src="{% static 'images/logo.jpeg' %}" alt="Logo">
+
+    <h1>NexGen Tax Consultancy</h1>
+</div>
+
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/booking/">Book Consultation</a></li>
+        </ul>
+    </nav>
+    </header>
+
+<section class="booking-page">
+
+    <div class="booking-container">
+
+        <div class="booking-left">
+            <h2>Book Your Consultation</h2>
+
+            <p>
+                Schedule a professional tax consultation with our experts.
+                Get assistance for GST filing, income tax returns,
+                auditing and financial services.
+            </p>
+
+            <div class="booking-info">
+                <p>✔ Expert Tax Advisors</p>
+                <p>✔ Fast Response</p>
+                <p>✔ Secure Consultation</p>
+            </div>
+        </div>
+
+        <div class="booking-right">
+
+            {% if success %}
+            <div class="success-message">
+                Consultation booked successfully! Confirmation mail sent.
+            </div>
+            {% endif %}
+
+            <form method="POST" onsubmit="showPopup(event)">
+
+                {% csrf_token %}
+
+                <div class="input-box">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                </div>
+
+                <div class="input-box">
+                    <input type="email" name="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-box">
+                    <input 
+                        type="tel" 
+                        name="phone" 
+                        placeholder="Phone Number"
+                        required
+                    >
+                </div>
+
+                <div class="input-box">
+                    <input type="date" name="date" required>
+                </div>
+
+                <div class="input-box">
+                    <textarea name="message" rows="5" placeholder="Describe Your Requirement"></textarea>
+                </div>
+
+                <button type="submit" class="book-btn">
+                    Confirm Booking
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- COMPANY -->
+
+        <div class="footer-box footer-brand">
+
+            <div class="footer-logo">
+
+                <img src="{% static 'images/logo.jpeg' %}" alt="NexGen Logo">
+
+                <div>
+                    <h2>NexGen Tax Consultancy</h2>
+                    <span>Trusted Financial Solutions</span>
+                </div>
+
+            </div>
+
+            <p>
+                Professional taxation, GST, auditing and financial
+                consultancy services tailored for businesses and
+                individuals across India.
+            </p>
+
+        </div>
+
+        <!-- LINKS -->
+
+        <div class="footer-box">
+
+            <h3>Quick Links</h3>
+
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="/services/">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+        </div>
+
+        <!-- SERVICES -->
+
+        <div class="footer-box">
+
+            <h3>Our Services</h3>
+
+            <ul>
+                <li>GST Registration</li>
+                <li>Income Tax Filing</li>
+                <li>Business Auditing</li>
+                <li>Company Registration</li>
+            </ul>
+
+        </div>
+
+        <!-- CONTACT -->
+
+        <div class="footer-box">
+
+            <h3>Contact Info</h3>
+
+            <p>📧 nexgentax2025@gmail.com</p>
+            <p>📞 +91 9566956176</p>
+            <p>📍 Chennai, Tamil Nadu, India</p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 NexGen Tax Consultancy |
+            All Rights Reserved
+        </p>
+
+    </div>
+
+</footer>
+<script>
+    function showPopup(event) {
+        event.preventDefault();
+
+        alert("Consultation booked successfully!");
+
+        event.target.submit();
+    }
+</script>
+
+</body>
+</html>
