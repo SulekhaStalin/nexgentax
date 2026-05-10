@@ -27,7 +27,7 @@ Message:
 {message}
             ''',
             settings.EMAIL_HOST_USER,
-            ['nexgentax2025@gmail.com'],
+            ['sulekhastalin2006@gmail.com'],
             fail_silently=True,
         )
 
@@ -83,7 +83,7 @@ Requirement:
 {message}
                 ''',
                 settings.EMAIL_HOST_USER,
-                ['nexgentax2025@gmail.com'],
+                ['sulekhastalin2006@gmail.com'],
                 fail_silently=False,
             )
 
