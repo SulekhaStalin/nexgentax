@@ -1,21 +1,22 @@
 from django.shortcuts import render
-from django.core.mail import send_mail
+from django.core.mail import get_connection, EmailMessage
 from django.conf import settings
 
 
 def home(request):
-
     if request.method == 'POST':
-
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
 
         try:
-            send_mail(
-                'New Contact Message',
-                f'''
+            connection = get_connection()
+            connection.open()
+
+            admin_mail = EmailMessage(
+                subject='New Contact Message',
+                body=f'''
 New Contact Request
 
 Name: {name}
@@ -25,14 +26,14 @@ Phone: {phone}
 Message:
 {message}
                 ''',
-                settings.DEFAULT_FROM_EMAIL,
-                ['sulekhastalin2006@gmail.com'],
-                fail_silently=False,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=['sulekhastalin2006@gmail.com'],
+                connection=connection,
             )
 
-            send_mail(
-                'Message Received - NexGen Tax Consultancy',
-                f'''
+            user_mail = EmailMessage(
+                subject='Message Received - NexGen Tax Consultancy',
+                body=f'''
 Hello {name},
 
 Thank you for contacting NexGen Tax Consultancy.
@@ -43,10 +44,14 @@ Our team will contact you shortly.
 Regards,
 NexGen Tax Consultancy
                 ''',
-                settings.DEFAULT_FROM_EMAIL,
-                [email],
-                fail_silently=False,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[email],
+                connection=connection,
             )
+
+            admin_mail.send()
+            user_mail.send()
+            connection.close()
 
         except Exception as e:
             print("EMAIL ERROR:", type(e).__name__, e)
@@ -59,9 +64,7 @@ NexGen Tax Consultancy
 
 
 def booking(request):
-
     if request.method == 'POST':
-
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
@@ -69,9 +72,12 @@ def booking(request):
         message = request.POST.get('message')
 
         try:
-            send_mail(
-                'New Consultation Booking',
-                f'''
+            connection = get_connection()
+            connection.open()
+
+            admin_mail = EmailMessage(
+                subject='New Consultation Booking',
+                body=f'''
 New Booking Received
 
 Name: {name}
@@ -82,14 +88,14 @@ Date: {date}
 Requirement:
 {message}
                 ''',
-                settings.DEFAULT_FROM_EMAIL,
-                ['sulekhastalin2006@gmail.com'],
-                fail_silently=False,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=['sulekhastalin2006@gmail.com'],
+                connection=connection,
             )
 
-            send_mail(
-                'Booking Confirmed - NexGen Tax Consultancy',
-                f'''
+            user_mail = EmailMessage(
+                subject='Booking Confirmed - NexGen Tax Consultancy',
+                body=f'''
 Hello {name},
 
 Your consultation booking is confirmed.
@@ -104,10 +110,14 @@ Thank you for choosing NexGen Tax Consultancy.
 Regards,
 NexGen Tax Consultancy
                 ''',
-                settings.DEFAULT_FROM_EMAIL,
-                [email],
-                fail_silently=False,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[email],
+                connection=connection,
             )
+
+            admin_mail.send()
+            user_mail.send()
+            connection.close()
 
         except Exception as e:
             print("EMAIL ERROR:", type(e).__name__, e)
