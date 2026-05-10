@@ -48,7 +48,7 @@ NexGen Tax Consultancy
             ''',
             settings.EMAIL_HOST_USER,
             [email],
-            fail_silently=True,
+            fail_silently=False,
         )
 
         return render(request, 'index.html', {
@@ -90,30 +90,27 @@ Requirement:
 
         # ================= USER CONFIRMATION =================
 
-        send_mail(
-            'Booking Confirmed',
-            f'''
-Hello {name},
+        try:
+            send_mail(
+                    'Booking Confirmed',
+                    f'''
+            Hello {name},
 
-Your consultation booking has been confirmed successfully.
+            Your consultation booking is confirmed.
 
-Booking Details:
-Date: {date}
-Phone: {phone}
+            Date: {date}
 
-Thank you for choosing NexGen Tax Consultancy.
-
-Regards,
-NexGen Tax Consultancy
-            ''',
-            settings.EMAIL_HOST_USER,
-            [email],
-            fail_silently=True,
-        )
-
-        return render(request, 'booking.html', {
-            'success': True
-        })
+            Thank you for choosing NexGen Tax Consultancy.
+                    ''',
+                    settings.EMAIL_HOST_USER,
+                    [email],
+                    fail_silently=False,
+                )
+        except Exception as e:
+                print("USER EMAIL ERROR:", e)
+                return render(request, 'booking.html', {
+                        'success': True
+                    })
 
     return render(request, 'booking.html')
 
