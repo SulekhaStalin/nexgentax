@@ -90,43 +90,44 @@ nav h1 {
     list-style: none;
 }
 
-.phone-item{
-    margin-left: 20px;
-}
-
 .phone-link{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:15px;
     text-decoration:none;
 }
 
-.phone-icon{
-    width:48px;
-    height:48px;
+.phone-circle{
+    width:58px;
+    height:58px;
+    background: #0b3d91;
     border-radius:50%;
-    background:#f7a600;
     display:flex;
     justify-content:center;
     align-items:center;
-    color:#fff;
-    font-size:20px;
     transition:.3s;
+}
+
+.phone-icon{
+    color:#fff;
+    font-size:24px;
+
+    /* Rotate so it faces the same direction as your screenshot */
+    transform:rotate(95deg);
 }
 
 .phone-number{
     font-size:18px;
     font-weight:700;
-    color:#0b3d91;
+    color:#163b7d;
 }
 
-.phone-link:hover .phone-icon{
-    background:#0b5ed7;
-    transform:rotate(-10deg);
+.phone-link:hover .phone-circle{
+    background:#20c997;
 }
 
 .phone-link:hover .phone-number{
-    color:#20c997;
+    color:#0b5ed7;
 }
 /* ================= HERO ================= */
 
