@@ -14,7 +14,7 @@ body {
 /* ================= HEADER ================= */
 
 header {
-    background: rgba(255,255,255,0.92);
+    background: rgba(255,255,255,0.96);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     position: sticky;
@@ -26,7 +26,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 60px;
+    padding: 18px 60px;
 }
 
 .logo {
@@ -49,24 +49,40 @@ nav h1 {
     -webkit-text-fill-color: transparent;
 }
 
-nav ul {
+.nav-right {
     display: flex;
-    list-style: none;
-    gap: 30px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
 }
 
-nav ul li a {
+.top-contact {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    color: #333;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 34px;
+}
+
+.nav-links li a {
     text-decoration: none;
     color: #0b3d91;
     font-weight: bold;
-    transition: 0.3s;
     font-size: 17px;
+    transition: 0.3s;
 }
 
-nav ul li a:hover {
+.nav-links li a:hover {
     color: #20c997;
 }
-
 /* ================= HERO ================= */
 
 .hero {
