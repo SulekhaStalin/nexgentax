@@ -113,7 +113,7 @@ nav h1 {
     font-size:24px;
 
     /* Rotate so it faces the same direction as your screenshot */
-    transform:rotate(95deg);
+    transform:rotate(75deg);
 }
 
 .phone-number{
