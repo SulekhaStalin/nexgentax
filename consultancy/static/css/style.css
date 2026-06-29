@@ -914,6 +914,54 @@ nav h1 {
     font-size: 15px;
     opacity: 0.85;
 }
+.footer-social{
+
+    margin-top:25px;
+
+    display:flex;
+
+    gap:15px;
+}
+
+.footer-social a{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:20px;
+
+    transition:.3s;
+}
+
+.footer-social a:hover{
+
+    background:#7ac943;
+
+    color:#071c4d;
+
+    transform:translateY(-5px);
+}
+.footer-copy{
+
+    margin-top:8px;
+
+    font-size:14px;
+
+    opacity:.75;
+}
 
 /* MOBILE */
 
