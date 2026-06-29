@@ -784,23 +784,16 @@ nav h1 {
 /* CONTAINER */
 
 .footer-container{
-    width: 90%;
-    margin: auto;
+    width:90%;
+    margin:auto;
 
-    display: grid;
+    display:grid;
 
-    grid-template-columns:
-    1.5fr
-    1fr
-    1fr
-    1fr;
+    grid-template-columns: 1.6fr 1fr 1.3fr 1.2fr;
 
-    gap: 50px;
+    gap:45px;
 
-    padding-bottom: 50px;
-
-    position: relative;
-    z-index: 2;
+    align-items:flex-start;
 }
 
 /* LOGO AREA */
@@ -962,7 +955,32 @@ nav h1 {
 
     opacity:.75;
 }
+.footer-contact{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
 
+.footer-contact a{
+    color:white;
+    text-decoration:none;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    transition:.3s;
+}
+
+.footer-contact a:hover{
+    color:#7ac943;
+    transform:translateX(5px);
+}
+
+.footer-contact i{
+    width:22px;
+    color:#7ac943;
+}
 /* MOBILE */
 
 @media(max-width:900px){
