@@ -60,13 +60,13 @@
             <h3>Business Registration</h3>
 
             <ul>
-                <li>Company Formation</li>
-                <li>LLP Registration</li>
-                <li>Start-up Registration</li>
-                <li>ROC Compliance</li>
-                <li>Trust Registration</li>
-                <li>Society Registration</li>
-                <li>IEC Registration</li>
+                <li onclick="openService('company')">Company Formation</li>
+                <li onclick="openService('llp')">LLP Registration</li>
+                <li onclick="openService('startup')">Start-up Registration</li>
+                <li onclick="openService('roc')">ROC Compliance</li>
+                <li onclick="openService('trust')">Trust Registration</li>
+                <li onclick="openService('society')">Society Registration</li>
+                <li onclick="openService('iec')">IEC Registration</li>
             </ul>
         </div>
 
@@ -74,13 +74,13 @@
             <h3>Licenses & Certifications</h3>
 
             <ul>
-                <li>ISO Certification</li>
-                <li>ISI Certification</li>
-                <li>FSSAI License</li>
-                <li>Trade License</li>
-                <li>Fire License</li>
-                <li>Hostel License</li>
-                <li>Drug License</li>
+                <li onclick="openService('iso')">ISO Certification</li>
+                <li onclick="openService('isi')">ISI Certification</li>
+                <li onclick="openService('fssai')">FSSAI License</li>
+                <li onclick="openService('trade')">Trade License</li>
+                <li onclick="openService('fire')">Fire License</li>
+                <li onclick="openService('hostel')">Hostel License</li>
+                <li onclick="openService('drug')">Drug License</li>
             </ul>
         </div>
 
@@ -88,12 +88,12 @@
             <h3>Compliance & HR</h3>
 
             <ul>
-                <li>Payroll Processing</li>
-                <li>ESIC & PF Compliance</li>
-                <li>Labour License</li>
-                <li>Accounting & Bookkeeping</li>
-                <li>Business Consulting</li>
-                <li>Digital Signature (DSC)</li>
+                <li onclick="openService('payroll')">Payroll Processing</li>
+                <li onclick="openService('esic')">ESIC & PF Compliance</li>
+                <li onclick="openService('labour')">Labour License</li>
+                <li onclick="openService('accounting')">Accounting & Bookkeeping</li>
+                <li onclick="openService('consulting')">Business Consulting</li>
+                <li onclick="openService('dsc')">Digital Signature (DSC)</li>
             </ul>
         </div>
 
@@ -101,11 +101,11 @@
             <h3>Legal & Other Services</h3>
 
             <ul>
-                <li>Trademark Registration</li>
-                <li>Patent Rights Registration</li>
-                <li>AGMARK Registration</li>
-                <li>APEDA & MPEDA Registration</li>
-                <li>Ayurvedic Drug License</li>
+                <li onclick="openService('trademark')">Trademark Registration</li>
+                <li onclick="openService('patent')">Patent Rights Registration</li>
+                <li onclick="openService('agmark')">AGMARK Registration</li>
+                <li onclick="openService('apeda')">APEDA & MPEDA Registration</li>
+                <li onclick="openService('ayurvedic')">Ayurvedic Drug License</li>
             </ul>
         </div>
 
@@ -249,128 +249,65 @@
 
 </div>
 <script>
-
 const services = {
+    gst: ["GST Services", "We help businesses with GST registration, GST filing, GST amendments, and GST compliance.", ["GST Registration", "GST Return Filing", "GST Notice Handling", "GST Amendment", "GST Cancellation"]],
+    income: ["Income Tax Services", "We assist individuals, salaried employees, professionals, and businesses with income tax filing.", ["ITR Filing", "Salary Income Tax Filing", "Business Tax Filing", "Tax Planning", "Notice Response"]],
+    tds: ["E-TDS / TCS", "We provide complete TDS and TCS filing and compliance support.", ["TDS Return Filing", "TCS Filing", "Correction Filing", "Quarterly Returns"]],
+    ptax: ["Professional Tax", "We help with professional tax registration, filing, and compliance.", ["PT Registration", "Monthly Filing", "Compliance Support"]],
+    taxnotice: ["GST & Income Tax Notices", "We assist in replying to GST and income tax department notices professionally.", ["Notice Review", "Reply Drafting", "Document Support", "Follow-up Guidance"]],
+    pan: ["PAN / TAN Service", "We provide PAN and TAN application and correction support.", ["New PAN", "PAN Correction", "TAN Registration", "TAN Correction"]],
 
-gst:{
-title:"GST Registration & Filing",
+    company: ["Company Formation", "We help entrepreneurs register and start their companies legally.", ["Private Limited Registration", "MOA & AOA Support", "DIN & DSC Support", "Company Incorporation"]],
+    llp: ["LLP Registration", "We assist with Limited Liability Partnership registration and compliance.", ["LLP Name Approval", "LLP Agreement", "Incorporation Filing"]],
+    startup: ["Start-up Registration", "We help startups complete registration and compliance requirements.", ["Startup India Registration", "Business Setup Support", "Documentation"]],
+    roc: ["ROC Compliance", "We support companies with Registrar of Companies filings and compliance.", ["Annual Filing", "DIR-3 KYC", "ROC Forms", "Compliance Support"]],
+    trust: ["Trust Registration", "We assist with trust registration documentation and legal filing.", ["Trust Deed", "Registration Filing", "Document Support"]],
+    society: ["Society Registration", "We help register societies with required documents and filing support.", ["Society Registration", "Bylaws Support", "Documentation"]],
+    iec: ["IEC Registration", "We assist import-export businesses with IEC registration.", ["IEC Application", "DGFT Support", "Import Export Code"]],
 
-description:"Our GST experts help businesses register under GST and remain compliant with GST laws.",
+    iso: ["ISO Certification", "We help businesses obtain ISO certification with documentation support.", ["ISO Consultation", "Document Preparation", "Certification Support"]],
+    isi: ["ISI Certification", "We support businesses in ISI certification documentation and application process.", ["ISI Application", "Compliance Support", "Documentation"]],
+    fssai: ["FSSAI License", "We assist food businesses with FSSAI registration and license support.", ["Basic FSSAI", "State License", "Central License", "Renewal Support"]],
+    trade: ["Trade License", "We help businesses apply for trade licenses as per local requirements.", ["Trade License Application", "Renewal Support", "Documentation"]],
+    fire: ["Fire License", "We assist businesses with fire license application documentation.", ["Fire NOC", "License Application", "Compliance Support"]],
+    hostel: ["Hostel License", "We help hostel businesses with license and compliance documentation.", ["License Support", "Documentation", "Renewal Guidance"]],
+    drug: ["Drug License", "We assist pharmacies and businesses with drug license support.", ["Retail Drug License", "Wholesale Drug License", "Documentation"]],
 
-points:[
-"GST Registration",
-"GST Return Filing",
-"GST Notice Handling",
-"GST Amendment",
-"GST Cancellation",
-"Annual GST Returns"
-]
-},
+    payroll: ["Payroll Processing", "We manage salary processing and employee compliance support.", ["Salary Processing", "Payslip Generation", "Payroll Reports"]],
+    esic: ["ESIC & PF Compliance", "We support employers with ESIC and PF registration and filing.", ["ESIC Registration", "PF Registration", "Monthly Compliance"]],
+    labour: ["Labour License", "We assist businesses with labour license application and compliance.", ["Labour License", "Renewal", "Compliance Support"]],
+    accounting: ["Accounting & Bookkeeping", "We maintain accurate accounts and bookkeeping records for businesses.", ["Bookkeeping", "Financial Statements", "Ledger Maintenance"]],
+    consulting: ["Business Consulting", "We provide practical business, tax, and compliance guidance.", ["Business Setup Advice", "Compliance Planning", "Tax Guidance"]],
+    dsc: ["Digital Signature (DSC)", "We help individuals and businesses obtain digital signature certificates.", ["Class 3 DSC", "DSC Renewal", "DSC Support"]],
 
-income:{
-title:"Income Tax Filing",
-
-description:"We provide complete Income Tax filing solutions for individuals, professionals and businesses.",
-
-points:[
-"ITR Filing",
-"Tax Planning",
-"Salary Income Returns",
-"Business Returns",
-"Tax Notice Response"
-]
-},
-
-tds:{
-title:"E-TDS / TCS",
-
-description:"Complete TDS and TCS compliance services.",
-
-points:[
-"TDS Filing",
-"TCS Filing",
-"TDS Correction",
-"Quarterly Returns"
-]
-},
-
-ptax:{
-title:"Professional Tax",
-
-description:"Professional Tax Registration and Compliance.",
-
-points:[
-"PT Registration",
-"Monthly Filing",
-"Compliance Support"
-]
-},
-
-notice:{
-title:"GST & Income Tax Notices",
-
-description:"Expert assistance in responding to departmental notices.",
-
-points:[
-"GST Notices",
-"Income Tax Notices",
-"Appeal Support"
-]
-},
-
-pan:{
-title:"PAN / TAN Services",
-
-description:"Quick PAN & TAN registration and correction services.",
-
-points:[
-"New PAN",
-"PAN Correction",
-"TAN Registration",
-"TAN Correction"
-]
-}
-
+    trademark: ["Trademark Registration", "We help protect your brand name, logo, and business identity.", ["Trademark Search", "Trademark Filing", "Objection Reply"]],
+    patent: ["Patent Rights Registration", "We assist with patent registration guidance and documentation.", ["Patent Filing Support", "Documentation", "Application Guidance"]],
+    agmark: ["AGMARK Registration", "We support agricultural product businesses with AGMARK registration.", ["AGMARK Application", "Documentation", "Compliance Support"]],
+    apeda: ["APEDA & MPEDA Registration", "We assist exporters with APEDA and MPEDA registration.", ["APEDA Registration", "MPEDA Registration", "Export Documentation"]],
+    ayurvedic: ["Ayurvedic Drug License", "We support Ayurvedic product businesses with licensing requirements.", ["Ayurvedic License", "Documentation", "Compliance Support"]]
 };
 
-function openService(name){
+function openService(key){
+    const s = services[key];
 
-const s=services[name];
+    document.getElementById("popupTitle").innerText = s[0];
+    document.getElementById("popupDescription").innerText = s[1];
 
-document.getElementById("popupTitle").innerHTML=s.title;
+    document.getElementById("popupList").innerHTML =
+        s[2].map(item => `<li>${item}</li>`).join("");
 
-document.getElementById("popupDescription").innerHTML=s.description;
-
-let html="";
-
-s.points.forEach(item=>{
-
-html+="<li>"+item+"</li>";
-
-});
-
-document.getElementById("popupList").innerHTML=html;
-
-document.getElementById("serviceModal").style.display="flex";
-
+    document.getElementById("serviceModal").style.display = "flex";
 }
 
 function closeService(){
-
-document.getElementById("serviceModal").style.display="none";
-
+    document.getElementById("serviceModal").style.display = "none";
 }
 
-window.onclick=function(e){
-
-if(e.target==document.getElementById("serviceModal")){
-
-closeService();
-
+window.onclick = function(e){
+    if(e.target === document.getElementById("serviceModal")){
+        closeService();
+    }
 }
-
-}
-
 </script>
 </body>
 </html>
