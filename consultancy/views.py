@@ -72,7 +72,7 @@ NexGen Tax Consultancy
         send_brevo_email(
             "New Contact Message",
             admin_message,
-            "sulekhastalin2006@gmail.com",
+            "nexgentax2025@gmail.com",
             "Admin",
         )
 
@@ -127,7 +127,7 @@ NexGen Tax Consultancy
         send_brevo_email(
             "New Consultation Booking",
             admin_message,
-            "sulekhastalin2006@gmail.com",
+            "nexgentax2025@gmail.com",
             "Admin",
         )
 
