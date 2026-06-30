@@ -29,6 +29,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'nexgentax.onrender.com',
+    'nexgentax.com',
+    'www.nexgentax.com',
     '127.0.0.1',
     'localhost'
 ]
