@@ -43,12 +43,16 @@
             <h3>Tax Services</h3>
 
             <ul>
-                <li>GST</li>
-                <li>Income Tax</li>
-                <li>E-TDS / TCS</li>
-                <li>Professional Tax</li>
-                <li>GST & Income Tax Notices</li>
-                <li>PAN / TAN Service</li>
+                <li onclick="openService('gst')">GST</li>
+                <li onclick="openService('income')">Income Tax</li>
+
+                <li onclick="openService('tds')">E-TDS / TCS</li>
+
+                <li onclick="openService('ptax')">Professional Tax</li>
+
+                <li onclick="openService('notice')">GST & Income Tax Notices</li>
+
+                <li onclick="openService('pan')">PAN / TAN Service</li>
             </ul>
         </div>
 
@@ -223,6 +227,150 @@
 </div>
 
 </footer>
+ <div id="serviceModal" class="service-modal">
 
+    <div class="service-popup">
+
+        <span class="close-popup" onclick="closeService()">&times;</span>
+
+        <h2 id="popupTitle"></h2>
+
+        <p id="popupDescription"></p>
+
+        <ul id="popupList"></ul>
+
+        <a href="/booking/">
+            <button class="popup-btn">
+                Book Consultation
+            </button>
+        </a>
+
+    </div>
+
+</div>
+<script>
+
+const services = {
+
+gst:{
+title:"GST Registration & Filing",
+
+description:"Our GST experts help businesses register under GST and remain compliant with GST laws.",
+
+points:[
+"GST Registration",
+"GST Return Filing",
+"GST Notice Handling",
+"GST Amendment",
+"GST Cancellation",
+"Annual GST Returns"
+]
+},
+
+income:{
+title:"Income Tax Filing",
+
+description:"We provide complete Income Tax filing solutions for individuals, professionals and businesses.",
+
+points:[
+"ITR Filing",
+"Tax Planning",
+"Salary Income Returns",
+"Business Returns",
+"Tax Notice Response"
+]
+},
+
+tds:{
+title:"E-TDS / TCS",
+
+description:"Complete TDS and TCS compliance services.",
+
+points:[
+"TDS Filing",
+"TCS Filing",
+"TDS Correction",
+"Quarterly Returns"
+]
+},
+
+ptax:{
+title:"Professional Tax",
+
+description:"Professional Tax Registration and Compliance.",
+
+points:[
+"PT Registration",
+"Monthly Filing",
+"Compliance Support"
+]
+},
+
+notice:{
+title:"GST & Income Tax Notices",
+
+description:"Expert assistance in responding to departmental notices.",
+
+points:[
+"GST Notices",
+"Income Tax Notices",
+"Appeal Support"
+]
+},
+
+pan:{
+title:"PAN / TAN Services",
+
+description:"Quick PAN & TAN registration and correction services.",
+
+points:[
+"New PAN",
+"PAN Correction",
+"TAN Registration",
+"TAN Correction"
+]
+}
+
+};
+
+function openService(name){
+
+const s=services[name];
+
+document.getElementById("popupTitle").innerHTML=s.title;
+
+document.getElementById("popupDescription").innerHTML=s.description;
+
+let html="";
+
+s.points.forEach(item=>{
+
+html+="<li>"+item+"</li>";
+
+});
+
+document.getElementById("popupList").innerHTML=html;
+
+document.getElementById("serviceModal").style.display="flex";
+
+}
+
+function closeService(){
+
+document.getElementById("serviceModal").style.display="none";
+
+}
+
+window.onclick=function(e){
+
+if(e.target==document.getElementById("serviceModal")){
+
+closeService();
+
+}
+
+}
+
+</script>
 </body>
 </html>
